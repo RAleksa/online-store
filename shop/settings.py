@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+<<<<<<< HEAD
 # from .local_settings import *
+=======
+>>>>>>> f77d22f12160e663e98eae7327280e74e749ebb1
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
