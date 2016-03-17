@@ -1,0 +1,81 @@
+/*
+#a55502 - рыже-коричневый
+#f8f8f8 - грязно-белый
+#89a6aa - серо-синий
+#1f323c - тёмно-синий
+*/
+
+#genres {
+	position: absolute;
+	top: 100px;
+	left: 20px;
+	width: 230px;
+	height: 500px;
+	color: #1f323c;
+}
+
+.genre {
+	text-decoration: none;
+	outline: none;
+}
+
+.genre:link {
+	color: #1f323c;
+}
+
+.genre:visited {
+	color: #1f323c;
+}
+
+.genre:hover {
+	color: #89a6aa;
+	text-decoration: none;
+}
+
+#books {
+    position: absolute;
+    top: 100px;
+    left: 260px;
+    width: calc(100% - 260px);
+}
+
+.book {
+    position: inherit;
+    width: 150px;
+    height: 220px;
+    border-radius: 6px;
+	outline: none;
+}
+
+.divbook {
+    position: inherit;
+    color: #1f323c;
+	outline: none;
+}
+
+.bookchar {
+    position: inherit;
+    top: 230px;
+    width: 150px;
+    text-align: center;
+}
+
+.divbook:hover .bookchar {
+    color: #89a6aa;
+}
+
+.divbook:link {
+    color: #1f323c;
+}
+
+.divbook:visited {
+    color: #1f323c;
+}
+
+.bookauthor {
+	font-size: 14px;
+}
+
+#content {
+    padding-bottom: 60px;
+}

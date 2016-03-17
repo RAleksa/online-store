@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ARbook</title>
+        {% block css %} {% endblock %}
+        <link rel="stylesheet" href="/static/css/base.css">
+        <link rel="shortcut icon" type="image/png" href="/static/pictures/favicon.ico"/>
+    </head>
+    <body>
+        <div id="topmenu">
+            <a href="/" id="topmenu_logo">
+                <img src="/static/pictures/booklogo.jpg" id="topmenu_logo_book" alt="booklogo">
+                <img src="/static/pictures/logo.jpg" id="topmenu_logo_text" alt="logo">
+            </a>
+
+            <div id="topmenu_search">
+                <input type="text" placeholder="Поиск книги" id="topmenu_search_input">
+                <input type="image" src="/static/pictures/search.png" id="topmenu_search_button" alt="search">
+            </div>
+
+            <a href="/bag/" id="topmenu_bag">
+                <span id="topmenu_bag_text">Корзина</span>
+            </a>
+
+            {% if auth %}
+                <a href="/accounts/profile" id="profile"><img src="/static/pictures/person.png" id="profile_logo" alt="pers"></a>
+                <a href="/accounts/logout" id="logout"><img src="/static/pictures/exit.png" id="logout_logo" alt="exit"></a>
+            {% else %}
+                <a href="/reg/" id="topmenu_reg">
+                    <span id="topmenu_reg_text">Регистрация</span>
+                </a>
+                <div id="topmenu_enter">
+                    <div id="topmenu_enter_text">Войти</div>
+                </div>
+            {% endif %}
+
+            <div id="topmenu_enterbox">
+                <input type="text" placeholder=" Введите Email" id="topmenu_email">
+                <input type="text" placeholder=" Введите пароль" id="topmenu_password">
+                <label id="topmenu_rememberme"><input type="checkbox" checked="checked"> Запомнить меня</label>
+                <input type="submit" value="Войти" id="topmenu_enterbutton">
+                <a href="/passrecovery/" id="topmenu_passrecovery">Забыли пароль?</a>
+                <a href="/login/vk-oauth2/" id="topmenu_enterwith"><img src="/static/pictures/vk.png" id="topmenu_enterwith_vk" alt="vk"></a>
+            </div>
+        </div>
+
+        {% block content %} {% endblock %}
+
+        <!-- <div id="footer">
+            
+        </div> -->
+        
+        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="/static/scripts/base.js"></script>
+        {% block javascript %} {% endblock %}
+    </body>
+</html>

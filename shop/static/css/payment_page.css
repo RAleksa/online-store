@@ -1,0 +1,13 @@
+/*
+#a55502 - рыже-коричневый
+#f8f8f8 - грязно-белый
+#89a6aa - серо-синий
+#1f323c - тёмно-синий
+*/
+
+#pay {
+	position: absolute;
+	top: 100px;
+	left: 42%;
+	text-align: center;
+}

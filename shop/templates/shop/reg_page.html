@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/reg_page.css">
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="/static/scripts/reg_page.js"></script>
+{% endblock %}
+
+{% block content %}
+	<div id="content">
+        <h2>Регистрация</h2>
+        <p>Имя</p>
+        <input type="text" placeholder='Например, Вениамин' required class="reg">
+        <p>Email</p>
+        <input type="text" placeholder='Например, veniamin@example.com' required class="reg">
+        <p>Пароль</p>
+        <input type="password" placeholder='Например, ********' required class="reg">
+        <p>Повторите пароль</p>
+        <input type="password" placeholder='Например, ********' required class="reg">
+        <p>ID пользователя, который Вас привел</p>
+        <input type="text" class="reg">
+        <p><input type="button" value="Зарегистрироваться" id="regbutton"></p>
+    </div>
+{% endblock %}

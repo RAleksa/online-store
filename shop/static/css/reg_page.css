@@ -1,0 +1,32 @@
+/*
+#a55502 - рыже-коричневый
+#f8f8f8 - грязно-белый
+#89a6aa - серо-синий
+#1f323c - тёмно-синий
+*/
+
+#content {
+    position: absolute;
+    top: 90px;
+    left: 20px;
+    color: #1f323c;
+}
+
+.reg {
+    width: 300px;
+    height: 20px;
+    padding-left: 7px;
+    color: #1f323c;
+	border-radius: 4px;
+	border: 1px #89a6aa solid;
+	outline: none;
+}
+
+#regbutton {
+    font-size: 20px;
+    height: 40px;
+    color: #1f323c;
+    background-color: #dbdbdb;
+    border-radius: 4px;
+    outline: none;
+}

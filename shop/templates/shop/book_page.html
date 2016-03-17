@@ -1,0 +1,49 @@
+{% extends "shop/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/book_page.css">
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="/static/scripts/book_page.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id='content'>
+        <img src='/static/books/book_{{ book_id }}/cover.jpg' alt="Book" id="bookpage_cover">
+        
+        <span id="bookpage_bookchar">
+            <span id="bookpage_bookname">{{ book.name }}</span>
+            <br>
+            <span id="bookpage_bookauthor">{{ book.author }}</span>
+            <br><br>
+            <div id="bookpage_bookgenres">
+                Жанры:
+                <br>
+                {% for g in book.genre %}
+                    <li>{{ g }}</li>
+                {% endfor %}
+            </div>
+        </span>
+        
+        <span id="rating">
+            <div id="stars">
+                <img src="/static/pictures/star.png" class="star" id="star0" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star1" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star2" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star3" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star4" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star5" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star6" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star7" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star8" alt="star">
+                <img src="/static/pictures/star.png" class="star" id="star9" alt="star">
+            </div>
+        </span>
+
+        <span id="addandcost">
+            <span>{{ book.price }}</span><img src="/static/pictures/rub.png" alt="р." id="rubles">
+            <input type="button" value="Добавить в корзину" id="addtobag">
+        </span>
+    </div>
+{% endblock %}

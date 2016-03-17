@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/profile_page.css">
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="/static/scripts/profile_page.js"></script>
+{% endblock %}
+
+{% block content %}
+    <p id="text">
+    	Профиль пользователя
+    	<br><br>
+    	Добро пожаловать, {{ first_name }}!
+    </p>
+{% endblock %}
