@@ -10,12 +10,12 @@
 
 {% block content %}
 	<div id="pay">
-		<h3>You are to pay:</h3>
+		<h3>Стоимость:</h3>
 
 		<p>{{ paypal_dict.amount }} {{ paypal_dict.currency_code }}</p>
 		<p>Invoice: {{ paypal_dict.invoice }}</p>
 		<br />
-		<p>Pay with PayPal:</p>
+		<p>Оплатить с помощью PayPal:</p>
 		{{ form.render }}
 	</div>
 {% endblock %}

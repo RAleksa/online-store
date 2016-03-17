@@ -28,6 +28,8 @@ books = [
         'genre':['Приключения', 'Роман'], 'visible':True},
         {'id':8, 'name':'Алиса в Стране чудес', 'author':'Льюис Кэрролл', 'price':380, 'rating':8.7, 'rus':True, 'eng':True,
         'genre':['Сказка'], 'visible':True},
+        {'id':9, 'name':'Ночной администратор', 'author':'Джон ле Карре', 'price':280, 'rating':7.6, 'rus':True, 'eng':True,
+        'genre':['Детектив', 'Драма'], 'visible':True},
     ]
 
 books.sort(key=lambda x: -x['rating'])
@@ -52,20 +54,27 @@ def paypal_success(request):
 
 @login_required
 def paypal_pay(request):
+    s = 0;
+    for i in range(len(books)):
+        s += books[i]['price']
     paypal_dict = {
         "business": "aoryabinina-facilitator@gmail.com",
-        "amount": "100.00",
+        "amount": s,
         "currency_code": "RUB",
         "item_name": "products in shop",
         "invoice": "INV-00001",
         "notify_url": reverse('paypal-ipn'),
         "return_url": "http://127.0.0.1:8000/payment/success/",
         "cancel_return": "http://127.0.0.1:8000/payment/cart/",
-        "custom": str(request.user.id)
+        "custom": str(request.user.id),
     }
 
     form = PayPalPaymentsForm(initial=paypal_dict)
-    context = {"form": form, "paypal_dict": paypal_dict}
+    context = {
+        "form": form,
+        "paypal_dict": paypal_dict,
+        'auth': request.user.is_authenticated(),
+    }
     return render(request, "shop/payment_page.html", context)
 
 @login_required
