@@ -1,0 +1,474 @@
+@font-face {
+    font-family: Avatar;
+    src: url(fonts/Avatar.ttf);
+}
+
+body {
+    padding-left: 15px;
+    padding-top: 10px;
+    font-family: Avatar;
+}
+
+p {
+    padding-top: 7px;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+#logo {
+    position: absolute;
+    left: 10px;
+}
+
+#booklogo {
+    position: inherit;
+    width: 80px;
+    height: 80px;
+}
+
+#bookstore {
+    position: inherit;
+    font-size: 60px;
+    left: 100px;
+    width: 400px;
+}
+
+#enterreg {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    font-size: 17px;
+}
+
+#enter {
+    border-right: 1px black solid;
+    padding-right: 15px;
+}
+
+#enter:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#reg {
+    padding-left: 15px;
+}
+
+#enterbox {
+    position: absolute;
+    right: 15px;
+    top: 60px;
+    height: 148px;
+    width: 210px;
+    font-size: 17px;
+    border: 1px black solid;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 0 0 10px gray;
+    display: none;
+    z-index: 2;
+}
+
+#enterbox_enter {
+    position: inherit;
+    top: 2px;
+    left: 10px;
+    font-size: 20px;
+}
+
+#enterbox_hr {
+    position: inherit;
+    top: 10px;
+    height: 1px;
+    width: 80px;
+    color: black;
+    background-color: black;
+    border: none;
+}
+
+#enterbox_email {
+    position: inherit;
+    top: 35px;
+    left: 6px;
+    height: 25px;
+    width: 176px;
+}
+
+#enterbox_password {
+    position: inherit;
+    top: 63px;
+    left: 6px;
+    height: 25px;
+    width: 176px;
+}
+
+#enterbox_checkbox {
+    position: inherit;
+    top: 88px;
+    left: 6px;
+    height: 25px;
+    font-size: 13px;
+}
+
+#enterbox_button {
+    position: inherit;
+    top: 115px;
+    left: 6px;
+    height: 25px;
+    width: 70px;
+    font-size: 16px;
+}
+
+#enterbox_passrecovery {
+    position: inherit;
+    top: 119px;
+    left: 86px;
+    font-size: 13px;
+}
+
+#subscribebox {
+    position: absolute;
+    right: 15px;
+    top: 60px;
+    height: 115px;
+    width: 210px;
+    border: 1px black solid;
+    border-radius: 6px;
+    z-index: 1;
+    font-size: 16px;
+}
+
+#subscribebox_subscribe {
+    position: inherit;
+    top: 5px;
+    left: 6px;
+}
+
+#subscribebox_hr {
+    position: inherit;
+    top: 12px;
+    height: 1px;
+    width: 208px;
+    color: black;
+    background-color: black;
+    border: none;
+}
+
+#subscribebox_email {
+    position: inherit;
+    top: 42px;
+    left: 6px;
+    height: 25px;
+    width: 176px;
+}
+
+#subscribebox_button {
+    position: inherit;
+    top: 75px;
+    left: 6px;
+    height: 30px;
+    width: 120px;
+    font-size: 16px;
+}
+
+#giftcardbox {
+    position: absolute;
+    right: 15px;
+    top: 190px;
+    height: 105px;
+    width: 210px;
+    border: 1px black solid;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+#giftcardbox_giftcard {
+    position: inherit;
+    top: 5px;
+    left: 6px;
+}
+
+#giftcardbox_sum {
+    position: inherit;
+    top: 30px;
+    left: 22px;
+    font-size: 14px;
+}
+
+#giftcardbox_button {
+    position: inherit;
+    top: 60px;
+    left: 45px;
+    height: 30px;
+    width: 120px;
+    font-size: 16px;
+}
+
+#bagbox {
+    position: absolute;
+    right: 230px;
+    top: 14px;
+    width: 185px;
+    height: 50px;
+}
+
+#baglogo {
+    position: inherit;
+    width: 47px;
+    height: 48px;
+    padding-left: 5px;
+}
+
+#bag {
+    position: inherit;
+    left: 55px;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 4px;
+}
+
+#searchbox {
+    position: absolute;
+    top: 127px;
+    width: calc(100% - 300px);
+    left: 40px;
+}
+
+#searchbox_text {
+    position: inherit;
+    width: calc(100% - 100px);
+    height: 35px;
+    font-size: 20px;
+}
+
+#searchbox_button {
+    position: inherit;
+    left: calc(100% - 97px);
+    font-size: 20px;
+    height: 35px;
+    width: 100px;
+}
+
+#reg_box {
+    position: absolute;
+    top: 110px;
+}
+
+.reg {
+    width: 300px;
+}
+
+#regbutton {
+    font-size: 20px;
+    height: 40px;
+}
+
+#recovery_box {
+    position: absolute;
+    top: 110px;
+}
+
+#bag_box {
+    position: absolute;
+    top: 110px;
+}
+
+#books {
+    position: absolute;
+    top: 220px;
+    left: 200px;
+    width: calc(100% - 460px);
+}
+
+.book {
+    position: inherit;
+    width: 150px;
+    height: 220px;
+}
+
+.divbook:hover .book {
+    box-shadow: 0 0 15px gray;
+}
+
+.divbook {
+    position: inherit;
+}
+
+.bookchar {
+    position: inherit;
+    top: 230px;
+    width: 150px;
+    text-align: center;
+}
+
+.divbook:hover .bookchar {
+    color: gray;
+}
+
+.bookname {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.bookauthor {
+
+}
+
+
+#genres {
+    position: absolute;
+    top: 240px;
+    left: 15px;
+    width: 165px;
+    font-size: 16px;
+    text-align: right;
+}
+
+
+#bookpage_book {
+    position: absolute;
+    top: 150px;
+    width: calc(100% - 260px);
+}
+
+#bookpage_cover {
+    position: inherit;
+    width: 225px;
+    height: 330px;
+}
+
+#rating {
+    position: inherit;
+    top: 340px;
+    width: 225px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.star {
+    width: 19x;
+    height: 19px;
+}
+
+#bookpage_bookchar {
+    position: inherit;
+    left: 250px;
+}
+
+#bookpage_bookname {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#bookpage_bookauthor {
+    font-size: 19px;
+}
+
+#bookpage_bookgenres {
+    font-size: 19px;
+}
+
+#addandcost {
+    position: inherit;
+    right: 50px;
+    top: 10px;
+    font-size: 50px;
+}
+
+#rubles {
+    width: 50px;
+    height: 50px;
+}
+
+#addtobag {
+    position: inherit;
+    right: 10px;
+    top: 90px;
+    width: 320px;
+    font-size: 30px;
+}
+
+.bagpage_book {
+    font-size: 20px;
+}
+
+.delbook {
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+    margin-right: 20px;
+}
+
+table  {
+    font-size: 30px;
+    width:  100%;
+    border-spacing: 0;
+}
+
+table td {
+    width: 43%;
+    vertical-align: top;
+}
+
+td.bagpage_price {
+    text-align: right;
+}
+
+.bagpage_rubles1 {
+    width: 20px;
+    height: 20px;
+}
+
+#sum {
+    text-align: right;
+    font-size: 40px;
+}
+
+.bagpage_rubles2 {
+    width: 40px;
+    height: 40px;
+}
+
+#bonus {
+    text-align: right;
+    font-size: 22px;
+}
+
+#bying_bonus {
+    font-size: 20px;
+}
+
+#bying_bonus_number {
+    font-size: 20px;
+    margin-left: 20px;
+    padding-left: 10px;
+    width: 200px;
+}
+
+#bying_bonus_avaliable {
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+#bying_code_use {
+    font-size: 20px;
+}
+
+#bying_сode {
+    font-size: 20px;
+    margin-left: 20px;
+    padding-left: 10px;
+    width: 220px;
+}
+
+#bying_button {
+    font-size: 30px;
+    margin-bottom: 100px;
+}

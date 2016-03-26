@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
@@ -134,6 +134,8 @@ def bag_page(request):
     })
 
 def book_page(request, book_id):
+    if int(book_id) >= len(books):
+        return HttpResponseNotFound('<h2>Упс! Такой книги нет :(  Попробуйте другую.</h2>')
     id = -1
     for i in range(len(books)):
         if books[i]['id'] == int(book_id):
