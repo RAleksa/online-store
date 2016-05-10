@@ -51,7 +51,6 @@ genres = [
 def paypal_success(request):
     return HttpResponse("Money is mine. Thanks.")
 
-
 @login_required
 def paypal_pay(request):
     s = 0;
