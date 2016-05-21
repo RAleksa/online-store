@@ -27,11 +27,11 @@ class Language(models.Model):
 
 
 class Qoute(models.Model):
-    qoute = models.TextField(max_length=100)
+    qoute = models.TextField()
 
 
 class Comment(models.Model):
-    comment = models.TextField(max_length=100)
+    comment = models.TextField()
 
 
 class Book(models.Model):
