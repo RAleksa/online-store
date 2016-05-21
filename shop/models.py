@@ -26,6 +26,14 @@ class Language(models.Model):
     language = models.CharField(max_length=100)
 
 
+class Qoute(models.Model):
+    qoute = models.TextField(max_length=100)
+
+
+class Comment(models.Model):
+    comment = models.TextField(max_length=100)
+
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
@@ -36,8 +44,8 @@ class Book(models.Model):
     rating = models.FloatField()
     languages = models.ManyToManyField(Language)
     audio = models.BooleanField()
-    qoutes = models.TextField()
-    comments = models.TextField()
+    qoutes = models.ManyToManyField(Qoute)
+    comments = models.ManyToManyField(Comment)
 
 
 class Buying(models.Model):
