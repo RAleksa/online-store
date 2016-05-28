@@ -9,18 +9,21 @@
 {% endblock %}
 
 {% block content %}
-	<div id="content">
+	<form action="/reg/" method="POST" id="content">
+        {% csrf_token %}
         <h2>Регистрация</h2>
+        <p>Логин</p>
+        <input type="text" placeholder='Например, Venik' name="login" required class="reg">
         <p>Имя</p>
-        <input type="text" placeholder='Например, Вениамин' required class="reg">
+        <input type="text" placeholder='Например, Veniamin' name="first_name" required class="reg">
         <p>Email</p>
-        <input type="text" placeholder='Например, veniamin@example.com' required class="reg">
+        <input type="text" placeholder='Например, veniamin@example.com' name="email" required class="reg">
         <p>Пароль</p>
-        <input type="password" placeholder='Например, ********' required class="reg">
+        <input type="password" placeholder='Например, ********' name="password" required class="reg">
         <p>Повторите пароль</p>
-        <input type="password" placeholder='Например, ********' required class="reg">
+        <input type="password" placeholder='Например, ********' name="password_again" required class="reg">
         <p>ID пользователя, который Вас привел</p>
-        <input type="text" class="reg">
-        <p><input type="button" value="Зарегистрироваться" id="regbutton"></p>
-    </div>
+        <input type="text" name="friend_id" class="reg">
+        <p><input type="submit" value="Зарегистрироваться" id="regbutton"></p>
+    </form>
 {% endblock %}

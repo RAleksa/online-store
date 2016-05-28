@@ -35,14 +35,16 @@
                 </div>
             {% endif %}
 
-            <div id="topmenu_enterbox">
-                <input type="text" placeholder=" Введите Email" id="topmenu_email">
-                <input type="text" placeholder=" Введите пароль" id="topmenu_password">
+            <form action="/accounts/login/" method="POST" id="topmenu_enterbox">
+                {% csrf_token %}
+                <input type="text" placeholder=" Введите логин" id="topmenu_login" name="login">
+                <input type="text" placeholder=" Введите пароль" id="topmenu_password" name="password">
                 <label id="topmenu_rememberme"><input type="checkbox" checked="checked"> Запомнить меня</label>
                 <input type="submit" value="Войти" id="topmenu_enterbutton">
                 <a href="/passrecovery/" id="topmenu_passrecovery">Забыли пароль?</a>
                 <a href="/login/vk-oauth2/" id="topmenu_enterwith"><img src="/static/pictures/vk.png" id="topmenu_enterwith_vk" alt="vk"></a>
-            </div>
+            </form>
+
         </div>
 
         {% block content %} {% endblock %}

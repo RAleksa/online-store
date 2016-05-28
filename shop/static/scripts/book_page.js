@@ -1,12 +1,12 @@
-$(document).ready(function() {    
+$(document).ready(function() {
     $('#addtobag').click(function() {
         var current_button = $(this);
         var book_url = document.location.href.split('/');
-        var id = book_url[book_url.length - 1];
+        var book_name = $('#bookpage_bookname').text();
         $.ajax({
-            url: "/addtobag",
-            type: "GET",
-            data: {"book_id": id},
+            url: "/addtobag/",
+            type: "POST",
+            data: {"book_name": book_name},
             success: function(data) {
                 current_button.attr('value', data);
             }

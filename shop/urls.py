@@ -30,7 +30,7 @@ urlpatterns = [
 
     url('', include(social.apps.django_app.urls, namespace='social')),
     url(r'^accounts/logout/$', shop.views.account_logout, name='logout'),
-	url(r'^accounts/login/$', shop.views.main_page, name='login'),
+	url(r'^accounts/login/$', shop.views.account_login, name='login'),
 	url(r'^accounts/profile/$', shop.views.account_profile, name='profile'),
 
 	url(r'^payment/cart/$', shop.views.paypal_pay, name='cart'),

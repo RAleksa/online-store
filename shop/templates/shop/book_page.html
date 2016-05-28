@@ -6,6 +6,13 @@
 
 {% block javascript %}
     <script type="text/javascript" src="/static/scripts/book_page.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block content %}

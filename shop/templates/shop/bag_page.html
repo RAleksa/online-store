@@ -10,42 +10,46 @@
 
 {% block content %}
     <div id="bag_box">
-	    <h2>Ваша корзина</h2>
-	    <table>
-	        {% for book in books %}
-	            <tr>
-	                <td class="bagpage_book">
-	                    <img src="/static/pictures/delbook.png" class="bagpage_delbook" title="Удалить из корзины" alt="del">
-	                    <a href="/book/{{ book.id }}" class="bagpage_books">
-	                    	<span class="bagpage_bookname">{{ book.name }}, {{ book.author }}</span>
-	                    </a>
-	                </td>
-	                <td class="bagpage_price">
-	                    <span class="bagpage_price1">{{ book.price }}</span> <img src="/static/pictures/rub.png" alt="р." class="bagpage_rubles1">
-	                </td>
-	            </tr>
-	        {% endfor %}
-	    </table>
-	    <br>
-	    <p id="bagpage_sum">
-	        Итог  -  {{ sum }}
-	        <img src="/static/pictures/rub.png" alt="р." class="bagpage_rubles2">
-	    </p>
-	    <p id="bagpage_bonus">
-	        За данную покупку Вам будут начислены бонусные баллы  -  {{ bonus }}
-	    </p>
+        <h2>Ваша корзина</h2>
+        {% if books %}
+            <table>
+                {% for book in books %}
+                    <tr>
+                        <td class="bagpage_book">
+                            <img src="/static/pictures/delbook.png" class="bagpage_delbook" title="Удалить из корзины" alt="del">
+                            <a href="/book/{{ book.id }}" class="bagpage_books">
+                                <span class="bagpage_bookname">{{ book.title }}, {{ book.author }}</span>
+                            </a>
+                        </td>
+                        <td class="bagpage_price">
+                            <span class="bagpage_price1">{{ book.price }}</span> <img src="/static/pictures/rub.png" alt="р." class="bagpage_rubles1">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <p id="bagpage_sum">
+                Итог  -  {{ sum }}
+                <img src="/static/pictures/rub.png" alt="р." class="bagpage_rubles2">
+            </p>
+            <p id="bagpage_bonus">
+                За данную покупку Вам будут начислены бонусные баллы  -  {{ bonus }}
+            </p>
 
-	    <h2>Покупка</h2>
-	    <label id="bying_bonus"><input type='checkbox'> Использовать бонусные баллы</label>
-	    <input type='text' placeholder='Впишите сколько' id='bying_bonus_number'>
-	    <span id="bying_bonus_avaliable">Доступно:   {{ avaliable_bonus }}</span>
+            <h2>Покупка</h2>
+            <label id="bying_bonus"><input type='checkbox'> Использовать бонусные баллы</label>
+            <input type='text' placeholder='Впишите сколько' id='bying_bonus_number'>
+            <span id="bying_bonus_avaliable">Доступно:   {{ avaliable_bonus }}</span>
 
-	    <br><br>
-	    <label id="bying_code_use"><input type='checkbox'> Использовать промокод</label>
-	    <input type='text' placeholder='Введите промокод' id='bying_сode'>
+            <br><br>
+            <label id="bying_code_use"><input type='checkbox'> Использовать промокод</label>
+            <input type='text' placeholder='Введите промокод' id='bying_сode'>
 
-	    <br><br>
-	    <a href="/payment/cart"><input type='button' value='Перейти к оплате' id='bying_button'></a>
-	    <br><br><br><br><br><br>
-	</div>
+            <br><br>
+            <a href="/payment/cart"><input type='button' value='Перейти к оплате' id='bying_button'></a>
+        {% else %}
+            <p>Корзина пуста</p>
+        {% endif %}
+        <br><br><br><br><br><br>
+    </div>
 {% endblock %}
