@@ -17,38 +17,33 @@
     font-size: 20px;
 }
 
+.bagpage_bookname:hover {
+    color: #89a6aa;
+}
+
 .bagpage_books {
-	text-decoration: none;
+    text-decoration: none;
+    padding-left: 20px;
+    font-size: 22px;
 }
 
 .bagpage_books:link {
-	color: #1f323c;
+    color: #1f323c;
 }
 
 .bagpage_books:visited {
-	color: #1f323c;
+    color: #1f323c;
 }
 
 .bagpage_delbook {
     cursor: pointer;
     width: 23px;
     height: 23px;
-    margin-right: 20px;
 }
 
-table  {
-    font-size: 26px;
-    width:  100%;
-    border-spacing: 0;
-}
-
-table td {
-    width: 37%;
-    vertical-align: top;
-}
-
-td.bagpage_price {
-    text-align: right;
+.bagpage_price {
+    padding-left: 20px;
+    font-size: 25px;
 }
 
 .bagpage_rubles1 {
@@ -57,7 +52,6 @@ td.bagpage_price {
 }
 
 #bagpage_sum {
-    text-align: right;
     font-size: 40px;
 }
 
@@ -67,7 +61,6 @@ td.bagpage_price {
 }
 
 #bagpage_bonus {
-    text-align: right;
     font-size: 22px;
 }
 
@@ -108,7 +101,7 @@ td.bagpage_price {
 	color: #89a6aa;
 }
 
-#bying_сode {
+#bying_code {
     font-size: 20px;
     margin-left: 20px;
     padding-left: 5px;
@@ -142,16 +135,4 @@ td.bagpage_price {
 
 #bying_button:hover {
 	cursor: pointer;
-}
-
-tr:hover {
-	cursor: pointer;
-}
-
-tr:hover .bagpage_bookname {
-	color: #89a6aa;
-}
-
-tr:hover .bagpage_price1 {
-	color: #89a6aa;
 }

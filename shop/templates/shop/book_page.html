@@ -17,18 +17,18 @@
 
 {% block content %}
     <div id='content'>
-        <img src='/static/books/book_{{ book_id }}/cover.jpg' alt="Book" id="bookpage_cover">
+        <img src='{{ book.cover_root }}' alt="Book" id="bookpage_cover">
         
         <span id="bookpage_bookchar">
-            <span id="bookpage_bookname">{{ book.name }}</span>
+            <span id="bookpage_bookname">{{ book.title }}</span>
             <br>
             <span id="bookpage_bookauthor">{{ book.author }}</span>
             <br><br>
             <div id="bookpage_bookgenres">
                 Жанры:
                 <br>
-                {% for g in book.genre %}
-                    <li>{{ g }}</li>
+                {% for genre in book_genres %}
+                    <li>{{ genre.genre }}</li>
                 {% endfor %}
             </div>
         </span>

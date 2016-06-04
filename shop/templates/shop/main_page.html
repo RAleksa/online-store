@@ -12,22 +12,20 @@
     <div id="content">
         <div id='genres'>
             {% for genre in genres %}
-                <p><a href="/genre/{{ forloop.counter0 }}" class="genre">{{ genre }}</a></p>
+                <p><a href="/genre/{{ genre.id }}" class="genre">{{ genre.genre }}</a></p>
             {% endfor %}
         </div>
 
         <div id='books'>
             {% for book in books %}
-                {% if book.visible %}
-                    <a href="/book/{{ book.id }}" class="divbook">
-                        <img src='/static/books/book_{{ book.id }}/cover.jpg' alt="Book" class="book">
-                        <span class="bookchar">
-                            <span class="bookname">{{ book.name }}</span>
-                            <br>
-                            <span class="bookauthor">{{ book.author }}</span>
-                        </span>
-                    </a>
-                {% endif %}
+                <a href="/book/{{ book.id }}" class="divbook">
+                    <img src="{{ book.cover_root }}" alt="Book" class="book">
+                    <span class="bookchar">
+                        <span class="bookname">{{ book.title }}</span>
+                        <br>
+                        <span class="bookauthor">{{ book.author }}</span>
+                    </span>
+                </a>
             {% endfor %}
         </div>
     </div>

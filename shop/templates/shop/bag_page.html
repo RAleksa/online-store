@@ -6,44 +6,61 @@
 
 {% block javascript %}
     <script type="text/javascript" src="/static/scripts/bag_page.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' }
+            });
+            $("img[id^='del_']").click(function() {
+                var book_del = $(this).attr("id");
+                var book_id = book_del.substring(4, book_del.length);
+                $.ajax({
+                    url: "/delfrombag/",
+                    type: "POST",
+                    data: {"book_id": book_id},
+                    success: function(data) {
+                        $('#book_' + book_id).remove();
+                        $('#total_price_sum').text(data.total_price);
+                        $('#bagpage_bonus_sum').text(data.bonus);
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block content %}
     <div id="bag_box">
         <h2>Ваша корзина</h2>
         {% if books %}
-            <table>
-                {% for book in books %}
-                    <tr>
-                        <td class="bagpage_book">
-                            <img src="/static/pictures/delbook.png" class="bagpage_delbook" title="Удалить из корзины" alt="del">
-                            <a href="/book/{{ book.id }}" class="bagpage_books">
-                                <span class="bagpage_bookname">{{ book.title }}, {{ book.author }}</span>
-                            </a>
-                        </td>
-                        <td class="bagpage_price">
-                            <span class="bagpage_price1">{{ book.price }}</span> <img src="/static/pictures/rub.png" alt="р." class="bagpage_rubles1">
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+            {% for book in books %}
+                <div class="bagpage_book" id="book_{{ book.id }}">
+                        <img src="/static/pictures/delbook.png" class="bagpage_delbook" title="Удалить из корзины" alt="del" id="del_{{ book.id }}">
+                        <span class="bagpage_price">{{ book.price }}</span> <img src="/static/pictures/rub.png" alt="р." class="bagpage_rubles1">
+                        <a href="/book/{{ book.id }}" class="bagpage_books">
+                            <span class="bagpage_bookname">{{ book.title }}, {{ book.author }}</span>
+                        </a>
+                </div>
+            {% endfor %}
             <br>
             <p id="bagpage_sum">
-                Итог  -  {{ sum }}
+                Итог:  <span id="total_price_sum">{{ sum }}</span>
                 <img src="/static/pictures/rub.png" alt="р." class="bagpage_rubles2">
             </p>
             <p id="bagpage_bonus">
-                За данную покупку Вам будут начислены бонусные баллы  -  {{ bonus }}
+                За данную покупку Вам будут начислены бонусные баллы  -  <span id="bagpage_bonus_sum">{{ bonus }}</span>
             </p>
 
             <h2>Покупка</h2>
             <label id="bying_bonus"><input type='checkbox'> Использовать бонусные баллы</label>
             <input type='text' placeholder='Впишите сколько' id='bying_bonus_number'>
-            <span id="bying_bonus_avaliable">Доступно:   {{ avaliable_bonus }}</span>
+            {% if avaliable_bonus %}
+                <span id="bying_bonus_avaliable">Доступно:   {{ avaliable_bonus }}</span>
+            {% endif %}
 
             <br><br>
             <label id="bying_code_use"><input type='checkbox'> Использовать промокод</label>
-            <input type='text' placeholder='Введите промокод' id='bying_сode'>
+            <input type='text' placeholder='Введите промокод' id='bying_code'>
 
             <br><br>
             <a href="/payment/cart"><input type='button' value='Перейти к оплате' id='bying_button'></a>

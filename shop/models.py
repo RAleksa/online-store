@@ -8,18 +8,18 @@ import random
 
 class Customer(models.Model):
     user = models.OneToOneField(User)
-    date_of_birth = models.DateField(null=True)
-    bonus = models.FloatField(default=0)
+    date_of_birth = models.DateField(null=True, blank=True)
+    bonus = models.IntegerField(default=0)
 
 
 class Order(models.Model):
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
     date_added = models.DateTimeField()
-    date_bought = models.DateTimeField(null=True)
+    date_bought = models.DateTimeField(null=True, blank=True)
     total_price = models.IntegerField(default=0)
     bonus_added = models.FloatField(default=0)
     bonus_used = models.FloatField(default=0)
-    promo_code = models.CharField(max_length=100, null=True)
+    promo_code = models.CharField(max_length=100, null=True, blank=True)
 
     def generate_token():
         char = [chr(i) for i in range(ord('a'), ord('z'))] + [chr(i) for i in range(ord('A'), ord('Z'))] + [str(i) for i in range(10)]
@@ -47,14 +47,15 @@ class Comment(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
-    price = models.FloatField()
-    genres = models.ManyToManyField(Genre)
-    description = models.TextField(null=True)
+    price = models.IntegerField()
+    genres = models.ManyToManyField(Genre, blank=True)
+    description = models.TextField(null=True, blank=True)
     rating = models.FloatField()
-    languages = models.ManyToManyField(Language)
+    cover_root = models.CharField(max_length=100, null=True, blank=True)
+    languages = models.ManyToManyField(Language, blank=True)
     audio = models.BooleanField()
-    qoutes = models.ManyToManyField(Qoute)
-    comments = models.ManyToManyField(Comment)
+    qoutes = models.ManyToManyField(Qoute, blank=True)
+    comments = models.ManyToManyField(Comment, blank=True)
 
     def add_genres(self, genres):
         for genre in genres:
@@ -63,7 +64,7 @@ class Book(models.Model):
             if not new_genre:
                 return None
 
-            self.genre.add(new_genre)
+            self.genres.add(new_genre[0])
 
         return 'OK'
 

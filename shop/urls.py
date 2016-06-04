@@ -25,8 +25,9 @@ urlpatterns = [
     url(r'^passrecovery/$', shop.views.passrecovery_page, name='passrecovery_page'),
     url(r'^bag/$', shop.views.bag_page, name='bag_page'),
     url(r'^book/(?P<book_id>[0-9]+)$', shop.views.book_page, name='book_page'),
-    url(r'^genre/(?P<genre>[0-9]+)$', shop.views.genre_page, name='genre_page'),
+    url(r'^genre/(?P<genre_id>[0-9]+)$', shop.views.genre_page, name='genre_page'),
     url(r'^addtobag/$', shop.views.addtobag, name='addtobag'),
+    url(r'^delfrombag/$', shop.views.delfrombag, name='delfrombag'),
 
     url('', include(social.apps.django_app.urls, namespace='social')),
     url(r'^accounts/logout/$', shop.views.account_logout, name='logout'),

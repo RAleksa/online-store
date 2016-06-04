@@ -13,131 +13,11 @@ from .models import Customer, Order, Genre, Language, Qoute, Comment, Book, Buyi
 from django.utils import timezone
 
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
-def add_books_and_genres():
-    Book.objects.all().delete()
-    Genre.objects.all().delete()
+from django.core.cache import cache
 
-    new_genre1 = Genre(genre='Научная фантастика')
-    new_genre1.save()
-    new_genre2 = Genre(genre='Детектив')
-    new_genre2.save()
-    new_genre3 = Genre(genre='Драма')
-    new_genre3.save()
-    new_genre4 = Genre(genre='Роман')
-    new_genre4.save()
-    new_genre5 = Genre(genre='Антиутопия')
-    new_genre5.save()
-    new_genre6 = Genre(genre='Фэнтези')
-    new_genre6.save()
-    new_genre7 = Genre(genre='Повесть')
-    new_genre7.save()
-    new_genre8 = Genre(genre='Триллер')
-    new_genre8.save()
-    new_genre9 = Genre(genre='Сказка')
-    new_genre9.save()
-    new_genre10 = Genre(genre='Приключения')
-    new_genre10.save()
-
-
-    new_book = Book(title='Игра престолов', author='Джордж Р. Р. Мартин', price=320, rating=9.2, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre6)
-    new_book.genres.add(new_genre4)
-    new_book.save()
-    new_book = Book(title='451 градус по Фаренгейту', author='Брэдбери Рэй Дуглас', price=390, rating=8.7, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre1)
-    new_book.genres.add(new_genre5)
-    new_book.genres.add(new_genre4)
-    new_book.save()
-    new_book = Book(title='Портрет Дориана Грея', author='Оскар Уайльд', price=280, rating=8.6, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre4)
-    new_book.save()
-    new_book = Book(title='Великий Гэтсби', author='Фрэнсис Скотт Фицджеральд', price=470, rating=8.3, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre4)
-    new_book.save()
-    new_book = Book(title='Собака Баскервилей', author='Артур Конан Дойл', price=440, rating=9.1, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre2)
-    new_book.genres.add(new_genre7)
-    new_book.save()
-    new_book = Book(title='Зелёная миля', author='Стивен Кинг', price=390, rating=9.4, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre8)
-    new_book.genres.add(new_genre3)
-    new_book.genres.add(new_genre4)
-    new_book.save()
-    new_book = Book(title='Чарли и шоколадная фабрика', author='Роальд Даль', price=510, rating=8.8, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre9)
-    new_book.genres.add(new_genre7)
-    new_book.save()
-    new_book = Book(title='Приключения Тома Сойера', author='Марк Твен', price=420, rating=8.8, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre4)
-    new_book.genres.add(new_genre10)
-    new_book.save()
-    new_book = Book(title='Алиса в Стране чудес', author='Льюис Кэрролл', price=380, rating=8.7, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre9)
-    new_book.save()
-    new_book = Book(title='Ночной администратор', author='Джон ле Карре', price=280, rating=7.6, audio=False)
-    new_book.save()
-    new_book.add_genres()
-    new_book.genres.add(new_genre2)
-    new_book.genres.add(new_genre3)
-    new_book.save()
-
-
-books = [
-        {'id':0, 'name':'451 градус по Фаренгейту', 'author':'Брэдбери Рэй Дуглас', 'price':390, 'rating':8.7, 'rus':True, 'eng':True,
-        'genre':['Научная фантастика', 'Антиутопия', 'Роман'], 'visible':True},
-        {'id':1, 'name':'Портрет Дориана Грея', 'author':'Оскар Уайльд', 'price':280, 'rating':8.6, 'rus':True, 'eng':True,
-        'genre':['Роман'], 'visible':True},
-        {'id':2, 'name':'Великий Гэтсби', 'author':'Фрэнсис Скотт Фицджеральд', 'price':470, 'rating':8.3, 'rus':True, 'eng':True,
-        'genre':['Роман'], 'visible':True},
-        {'id':3, 'name':'Игра престолов', 'author':'Джордж Р. Р. Мартин', 'price':320, 'rating':9.2, 'rus':True, 'eng':True,
-        'genre':['Фэнтези', 'Роман'], 'visible':True},
-        {'id':4, 'name':'Собака Баскервилей', 'author':'Артур Конан Дойл', 'price':440, 'rating':9.1, 'rus':True, 'eng':True,
-        'genre':['Детектив', 'Повесть'], 'visible':True},
-        {'id':5, 'name':'Зелёная миля', 'author':'Стивен Кинг', 'price':390, 'rating':9.4, 'rus':True, 'eng':True,
-        'genre':['Триллер', 'Драма', 'Роман'], 'visible':True},
-        {'id':6, 'name':'Чарли и шоколадная фабрика', 'author':'Роальд Даль', 'price':510, 'rating':8.8, 'rus':True, 'eng':True,
-        'genre':['Сказка', 'Повесть'], 'visible':True},
-        {'id':7, 'name':'Приключения Тома Сойера', 'author':'Марк Твен', 'price':420, 'rating':8.8, 'rus':True, 'eng':True,
-        'genre':['Приключения', 'Роман'], 'visible':True},
-        {'id':8, 'name':'Алиса в Стране чудес', 'author':'Льюис Кэрролл', 'price':380, 'rating':8.7, 'rus':True, 'eng':True,
-        'genre':['Сказка'], 'visible':True},
-        {'id':9, 'name':'Ночной администратор', 'author':'Джон ле Карре', 'price':280, 'rating':7.6, 'rus':True, 'eng':True,
-        'genre':['Детектив', 'Драма'], 'visible':True},
-    ]
-
-books.sort(key=lambda x: -x['rating'])
-
-genres = [
-    'Научная фантастика',
-    'Детектив',
-    'Драма',
-    'Роман',
-    'Антиутопия',
-    'Фэнтези',
-    'Повесть',
-    'Триллер',
-    'Сказка',
-    'Приключения',
-]
+BONUS_FOR_THE_ORDER = 0.05
 
 @csrf_exempt
 def paypal_success(request):
@@ -199,22 +79,33 @@ def account_login(request):
 
 
 def main_page(request):
-    for i in range(len(books)):
-        books[i]['visible'] = True
+    books = cache.get_or_set('books', Book.objects.all(), 10)
+    genres = Genre.objects.all()
+
+    book_genres = []
+    for book in books:
+        book_genres.append(books[0].genres.all())
 
     return render(request, 'shop/main_page.html', {
-    	'books': books,
+        'books': books,
         'genres': genres,
         'auth': request.user.is_authenticated(),
     })
 
 
-def genre_page(request, genre):
-    for i in range(len(books)):
-        books[i]['visible'] = True
-    for i in range(len(books)):
-        if genres[int(genre)] not in books[i]['genre']:
-            books[i]['visible'] = False
+def genre_page(request, genre_id):
+    books_all = Book.objects.all()
+    genres = Genre.objects.all()
+
+    genre = Genre.objects.filter(id=genre_id)
+    if not genre:
+        return HttpResponseNotFound('<h2>Жанр не найден :(</h2>')
+
+    books = []
+    for book in books_all:
+        if genre[0] in book.genres.all():
+            books.append(book)
+
     return render(request, 'shop/main_page.html', {
         'books': books,
         'genres': genres,
@@ -243,6 +134,10 @@ def reg_page(request):
             if friend_id != '':
                 new_user.friend_id = friend_id
             new_user.save()
+
+            # Login
+            user = authenticate(username=username, password=password)
+            login(request, user)
 
             # Copy User to Customer
             new_customer = Customer(user=new_user)
@@ -288,8 +183,11 @@ def bag_page(request):
 
     order = Order.objects.get(token=token)
     buying = Buying.objects.filter(buying_id=order)
-    customer = Customer.objects.get(user=request.user)
-    print(buying)
+
+    customer = None
+    if request.user.is_authenticated():
+        customer = Customer.objects.get(user=request.user)
+    # print(buying)
 
     books = []
     for b in buying:
@@ -298,24 +196,20 @@ def bag_page(request):
     return render(request, 'shop/bag_page.html', {
         'books': books,
         'sum': order.total_price,
-        'bonus': order.total_price // 20,
-        'avaliable_bonus': customer.bonus,
+        'bonus': round(order.total_price * BONUS_FOR_THE_ORDER),
+        'avaliable_bonus': customer.bonus if customer is not None else '',
         'auth': request.user.is_authenticated(),
     })
 
 
 def book_page(request, book_id):
-    if int(book_id) >= len(books):
-        return HttpResponseNotFound('<h2>Упс! Такой книги нет :(  Попробуйте другую.</h2>')
-    id = -1
-    for i in range(len(books)):
-        if books[i]['id'] == int(book_id):
-            id = i
-            break
+    book = Book.objects.filter(id=book_id)
+    if not book:
+        return HttpResponseNotFound('<h2>Книга не найдена :(</h2>')
 
     return render(request, 'shop/book_page.html', {
-    	"book_id": book_id,
-        "book": books[id],
+        'book': book[0],
+        'book_genres': book[0].genres.all(),
         'auth': request.user.is_authenticated(),
     })
 
@@ -337,3 +231,23 @@ def addtobag(request):
         order.save()
 
     return HttpResponse("Добавлено")
+
+def delfrombag(request):
+    book_id = int(request.POST.get('book_id'))
+
+    token, request = get_order(request)
+    order = Order.objects.get(token=token)
+
+    book = Book.objects.filter(id=book_id)
+    if not book:
+        return HttpResponseNotFound('<h2>Ошибка :(</h2>')
+
+    Buying.objects.filter(buying_id=order, book_id=book[0]).delete()
+    order.total_price -= book[0].price
+    order.save()
+
+
+    return JsonResponse({
+        'total_price': order.total_price,
+        'bonus': round(order.total_price * BONUS_FOR_THE_ORDER),
+    })
