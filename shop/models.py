@@ -11,6 +11,11 @@ class Customer(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     bonus = models.IntegerField(default=0)
 
+    def generate_special_id():
+        char = [chr(i) for i in range(ord('a'), ord('z'))] + [chr(i) for i in range(ord('A'), ord('Z'))] + [str(i) for i in range(10)]
+        return ''.join([random.choice(char) for i in range(20)])
+
+    special_id = models.CharField(max_length=20, default=generate_special_id())
 
 class Order(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
@@ -25,7 +30,7 @@ class Order(models.Model):
         char = [chr(i) for i in range(ord('a'), ord('z'))] + [chr(i) for i in range(ord('A'), ord('Z'))] + [str(i) for i in range(10)]
         return ''.join([random.choice(char) for i in range(40)])
 
-    token = models.CharField(max_length=40, default=generate_token())
+    token = models.CharField(max_length=40, default=generate_token(), unique=True)
 
 
 class Genre(models.Model):

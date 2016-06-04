@@ -12,16 +12,23 @@
 	<form action="/reg/" method="POST" id="content">
         {% csrf_token %}
         <h2>Регистрация</h2>
+
+        {% if error %}
+            <p id="error">{{error}}</p>
+        {% endif %}
+
         <p>Логин</p>
-        <input type="text" placeholder='Например, Venik' name="login" required class="reg">
+        <input type="text" placeholder='Например, Venik' name="login" required class="reg"><span class="required_star"> *</span>
         <p>Имя</p>
-        <input type="text" placeholder='Например, Veniamin' name="first_name" required class="reg">
+        <input type="text" placeholder='Например, Veniamin' name="name" required class="reg"><span class="required_star"> *</span>
         <p>Email</p>
-        <input type="text" placeholder='Например, veniamin@example.com' name="email" required class="reg">
+        <input type="text" placeholder='Например, veniamin@example.com' name="email" required class="reg"><span class="required_star"> *</span>
         <p>Пароль</p>
-        <input type="password" placeholder='Например, ********' name="password" required class="reg">
+        <input type="password" placeholder='Например, ********' name="password" required class="reg"><span class="required_star"> *</span>
         <p>Повторите пароль</p>
-        <input type="password" placeholder='Например, ********' name="password_again" required class="reg">
+        <input type="password" placeholder='Например, ********' name="password_again" required class="reg"><span class="required_star"> *</span>
+        <p>Дата рождения (чтобы у нас была возможность Вас поздравить)</p>
+        <input type="date" min="1900-01-01" name="date_of_birth" class="reg">
         <p>ID пользователя, который Вас привел</p>
         <input type="text" name="friend_id" class="reg">
         <p><input type="submit" value="Зарегистрироваться" id="regbutton"></p>

@@ -51,9 +51,13 @@ def paypal_pay(request):
 
 @login_required
 def account_profile(request):
-    first_name = request.user.first_name
+    customer = Customer.objects.get(user=request.user)
     return render(request, 'shop/profile_page.html', {
-        'first_name': request.user.first_name,
+        'login': request.user.username,
+        'name': request.user.first_name,
+        'email': request.user.email,
+        'special_id': customer.special_id,
+        'bonus': customer.bonus,
         'auth': request.user.is_authenticated(),
     })
 
@@ -119,7 +123,7 @@ def reg_page(request):
     else:
         if request.method == 'POST':
             username = request.POST.get('login')
-            first_name = request.POST.get('first_name')
+            first_name = request.POST.get('name')
             email = request.POST.get('email')
             password = request.POST.get('password')
             password_again = request.POST.get('password_again')
@@ -127,15 +131,44 @@ def reg_page(request):
                 return render(request, 'shop/reg_page.html', {
                     'error': 'Пароли не совпадают'
                 })
+
+            # Check if this username and email is free
+            if User.objects.filter(username=username):
+                return render(request, 'shop/reg_page.html', {
+                    'error': 'Этот логин уже занят'
+                })
+            if User.objects.filter(email=email):
+                return render(request, 'shop/reg_page.html', {
+                    'error': 'На этот email уже зарегистрирован аккаунт'
+                })
             
+            friend_id = request.POST.get('friend_id')
+            if friend_id:
+                friend = Customer.objects.filter(special_id=friend_id)
+                if friend:
+                    # Add bonus to a friend
+                    friend[0].bonus += 20
+                    friend[0].save()
+
+                else:
+                    return render(request, 'shop/reg_page.html', {
+                        'error': 'Пользователя с таким ID у нас нет'
+                    })
+
             # Create User
             new_user = User.objects.create_user(username=username, first_name=first_name, email=email, password=password)
-            friend_id = request.POST.get('friend_id')
-            if friend_id != '':
-                new_user.friend_id = friend_id
+
+            friend = Customer.objects.filter(special_id=friend_id)
+            if friend:
+                new_user.friend_id = friend[0]
+                
+            date_of_birth = request.POST.get('date_of_birth')
+            if date_of_birth:
+                new_user.date_of_birth = date_of_birth
+
             new_user.save()
 
-            # Login
+            # Log in
             user = authenticate(username=username, password=password)
             login(request, user)
 
@@ -164,8 +197,19 @@ def passrecovery_page(request):
 def get_order(request):
     if request.user.is_authenticated():
         customer = Customer.objects.get(user=request.user)
-        order = Order.objects.get(customer_id=customer)
-        return order.token, request
+        if 'token' in request.session:
+            order = Order.objects.get(token=request.session['token'])
+            order.customer_id = customer
+            order.save()
+            return order.token, request
+        else:
+            order = Order.objects.filter(customer_id=customer)
+            if order:
+                return order[0].token, request
+            else:
+                new_order = Order(customer_id=customer, date_added=timezone.now())
+                new_order.save()
+                return new_order.token, request
     
     if 'token' in request.session:
         return request.session['token'], request
