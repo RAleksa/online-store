@@ -52,18 +52,22 @@
             </p>
 
             <h2>Покупка</h2>
-            <label id="bying_bonus"><input type='checkbox'> Использовать бонусные баллы</label>
-            <input type='text' placeholder='Впишите сколько' id='bying_bonus_number'>
-            {% if avaliable_bonus %}
-                <span id="bying_bonus_avaliable">Доступно:   {{ avaliable_bonus }}</span>
-            {% endif %}
 
-            <br><br>
-            <label id="bying_code_use"><input type='checkbox'> Использовать промокод</label>
-            <input type='text' placeholder='Введите промокод' id='bying_code'>
+            <form action="/payment/cart/" method="POST">
+                {% csrf_token %}
+                <label id="bying_bonus"><input type='checkbox' name="bying_bonus_label"> Использовать бонусные баллы</label>
+                <input type='text' placeholder='Впишите сколько' id='bying_bonus_number' name="bying_bonus_number">
+                {% if avaliable_bonus %}
+                    <span id="bying_bonus_avaliable">Доступно:   {{ avaliable_bonus }}</span>
+                {% endif %}
 
-            <br><br>
-            <a href="/payment/cart"><input type='button' value='Перейти к оплате' id='bying_button'></a>
+                <br><br>
+                <label id="bying_code_use"><input type='checkbox' name="bying_code_use_label"> Использовать промокод</label>
+                <input type='text' placeholder='Введите промокод' id='bying_code' name="bying_code">
+
+                <br><br>
+                <input type='submit' value='Перейти к оплате' id='bying_button'>
+            </form>
         {% else %}
             <p>Корзина пуста</p>
         {% endif %}

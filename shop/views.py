@@ -25,9 +25,7 @@ def paypal_success(request):
 
 @login_required
 def paypal_pay(request):
-    s = 0;
-    for i in range(len(books)):
-        s += books[i]['price']
+    s = 543
     paypal_dict = {
         "business": "aoryabinina-facilitator@gmail.com",
         "amount": s,
@@ -51,7 +49,14 @@ def paypal_pay(request):
 
 @login_required
 def account_profile(request):
-    customer = Customer.objects.get(user=request.user)
+    customer = Customer.objects.filter(user=request.user)
+
+    if not customer:
+        customer = Customer(user=request.user)
+        customer.save()
+    else:
+        customer = customer[0]
+
     return render(request, 'shop/profile_page.html', {
         'login': request.user.username,
         'name': request.user.first_name,
@@ -118,74 +123,85 @@ def genre_page(request, genre_id):
 
 
 def reg_page(request):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('/')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('login')
-            first_name = request.POST.get('name')
-            email = request.POST.get('email')
-            password = request.POST.get('password')
-            password_again = request.POST.get('password_again')
-            if password != password_again:
-                return render(request, 'shop/reg_page.html', {
-                    'error': 'Пароли не совпадают'
-                })
+    if request.method == 'POST':
+        username = request.POST.get('login')
+        first_name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        password_again = request.POST.get('password_again')
+        if password != password_again:
+            return render(request, 'shop/reg_page.html', {
+                'error': 'Пароли не совпадают',
+                'login': username,
+                'first_name': first_name,
+                'email': email,
+            })
 
-            # Check if this username and email is free
-            if User.objects.filter(username=username):
-                return render(request, 'shop/reg_page.html', {
-                    'error': 'Этот логин уже занят'
-                })
-            if User.objects.filter(email=email):
-                return render(request, 'shop/reg_page.html', {
-                    'error': 'На этот email уже зарегистрирован аккаунт'
-                })
-            
-            friend_id = request.POST.get('friend_id')
-            if friend_id:
-                friend = Customer.objects.filter(special_id=friend_id)
-                if friend:
-                    # Add bonus to a friend
-                    friend[0].bonus += 20
-                    friend[0].save()
-
-                else:
-                    return render(request, 'shop/reg_page.html', {
-                        'error': 'Пользователя с таким ID у нас нет'
-                    })
-
-            # Create User
-            new_user = User.objects.create_user(username=username, first_name=first_name, email=email, password=password)
-
+        # Check if this username and email is free
+        if User.objects.filter(username=username):
+            return render(request, 'shop/reg_page.html', {
+                'error': 'Этот логин уже занят',
+                'login': username,
+                'first_name': first_name,
+                'email': email,
+            })
+        if User.objects.filter(email=email):
+            return render(request, 'shop/reg_page.html', {
+                'error': 'На этот email уже зарегистрирован аккаунт',
+                'login': username,
+                'first_name': first_name,
+                'email': email,
+            })
+        
+        friend_id = request.POST.get('friend_id')
+        if friend_id:
             friend = Customer.objects.filter(special_id=friend_id)
             if friend:
-                new_user.friend_id = friend[0]
-                
-            date_of_birth = request.POST.get('date_of_birth')
-            if date_of_birth:
-                new_user.date_of_birth = date_of_birth
+                # Add bonus to a friend
+                friend[0].bonus += 20
+                friend[0].save()
 
-            new_user.save()
+            else:
+                return render(request, 'shop/reg_page.html', {
+                    'error': 'Пользователя с таким ID у нас нет',
+                    'login': username,
+                    'first_name': first_name,
+                    'email': email,
+                })
 
-            # Log in
-            user = authenticate(username=username, password=password)
-            login(request, user)
+        # Create User
+        new_user = User.objects.create_user(username=username, first_name=first_name, email=email, password=password)
 
-            # Copy User to Customer
-            new_customer = Customer(user=new_user)
-            new_customer.save()
+        friend = Customer.objects.filter(special_id=friend_id)
+        if friend:
+            new_user.friend_id = friend[0]
+            
+        date_of_birth = request.POST.get('date_of_birth')
+        if date_of_birth:
+            new_user.date_of_birth = date_of_birth
 
-            if 'token' in request.session:
-                token = request.session['token']
-                order = Order.objects.get(token=token)
-                order.customer_id = Customer.objects.get(user=new_user)
-                order.save()
+        new_user.save()
 
-            return HttpResponseRedirect('/accounts/profile')
-        else:
-            return render(request, 'shop/reg_page.html', {
-            })
+        # Log in
+        user = authenticate(username=username, password=password)
+        login(request, user)
+
+        # Copy User to Customer
+        new_customer = Customer(user=new_user)
+        new_customer.save()
+
+        if 'token' in request.session:
+            token = request.session['token']
+            order = Order.objects.get(token=token)
+            order.customer_id = Customer.objects.get(user=new_user)
+            order.save()
+
+        return HttpResponseRedirect('/accounts/profile')
+    elif request.user.is_authenticated():
+        return HttpResponseRedirect('/')
+    else:
+        return render(request, 'shop/reg_page.html', {
+        })
 
 
 def passrecovery_page(request):

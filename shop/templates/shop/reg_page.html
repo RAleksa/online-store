@@ -18,11 +18,11 @@
         {% endif %}
 
         <p>Логин</p>
-        <input type="text" placeholder='Например, Venik' name="login" required class="reg"><span class="required_star"> *</span>
+        <input type="text" placeholder='Например, Venik' name="login" required class="reg" value="{{ login }}"><span class="required_star"> *</span>
         <p>Имя</p>
-        <input type="text" placeholder='Например, Veniamin' name="name" required class="reg"><span class="required_star"> *</span>
+        <input type="text" placeholder='Например, Veniamin' name="name" required class="reg" value="{{ first_name }}"><span class="required_star"> *</span>
         <p>Email</p>
-        <input type="text" placeholder='Например, veniamin@example.com' name="email" required class="reg"><span class="required_star"> *</span>
+        <input type="text" placeholder='Например, veniamin@example.com' name="email" required class="reg" value="{{ email }}"><span class="required_star"> *</span>
         <p>Пароль</p>
         <input type="password" placeholder='Например, ********' name="password" required class="reg"><span class="required_star"> *</span>
         <p>Повторите пароль</p>
